@@ -1,8 +1,40 @@
-Simple 'extend' helper adapted from Backbone.js and CoffeeScript.
+# simpler-extend
+
+Simple 'extend' helper for inheritance and subclassing. Adapted from Backbone.js and CoffeeScript.
 
 Works like [simple-extend](https://www.npmjs.com/package/simple-extend), except this does not have any dependencies9
 
+<br>
+
+## Usage
+
+Assign it to your base class's `.extend`:
+
 ```js
-function Base() { ... }
-Base.extend = require('simpler-extend');
+function Shape() { ... }
+Shape.extend = require('simpler-extend');
 ```
+
+Then use it to subclass:
+
+```js
+var Circle = Shape.extend({
+  ...
+});
+```
+
+See Backbone.js's [Model.extend](http://backbonejs.org/#Model-extend) documentation for more details.
+
+<br>
+
+## Thanks
+
+**simpler-extend** © 2015+, Rico Sta. Cruz. Released under the [MIT] License.<br>
+Authored and maintained by Rico Sta. Cruz with help from contributors ([list][contributors]).
+
+> [ricostacruz.com](http://ricostacruz.com) &nbsp;&middot;&nbsp;
+> GitHub [@rstacruz](https://github.com/rstacruz) &nbsp;&middot;&nbsp;
+> Twitter [@rstacruz](https://twitter.com/rstacruz)
+
+[MIT]: http://mit-license.org/
+[contributors]: http://github.com/rstacruz/simpler-extend/contributors
