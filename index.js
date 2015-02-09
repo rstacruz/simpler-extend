@@ -25,8 +25,9 @@ function extend (protoProps, staticProps) {
   if (staticProps) _extend(Sub, staticProps);
 
   function Sub() {
-    Parent.constructor.apply(this, arguments);
-    if (this.initialize) this.initialize.apply(this, arguments);
+    Parent.apply(this, arguments);
+    if (Sub.prototype.initialize)
+      Sub.prototype.initialize.apply(this, arguments);
   }
 
   return Sub;

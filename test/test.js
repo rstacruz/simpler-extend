@@ -1,56 +1,72 @@
 var expect = require('chai').expect;
 var extend = require('../index');
 
-var Circle, Ellipse;
+var BBB, CCC;
 
 describe('basic case', function () {
-  function Shape() {};
-  Shape.prototype.getArea = function () { return 3; };
-  Shape.extend = extend;
+  function AAA() {};
+  AAA.prototype.getArea = function () { return 3; };
+  AAA.extend = extend;
 
   it('works', function () {
-    Circle = Shape.extend();
-    expect((new Circle()).getArea()).eql(3);
+    BBB = AAA.extend();
+    expect((new BBB()).getArea()).eql(3);
   });
 
   it('works with a prototype', function () {
-    Circle = Shape.extend({
+    BBB = AAA.extend({
       getArea: function () { return 9; }
     });
 
-    expect((new Circle()).getArea()).eql(9);
+    expect((new BBB()).getArea()).eql(9);
   });
 
   it('can accept static properties', function () {
-    Circle = Shape.extend(null, {
+    BBB = AAA.extend(null, {
       getInstance: function () { return "this"; }
     });
 
-    expect(Circle.getInstance()).eql("this");
+    expect(BBB.getInstance()).eql("this");
   });
 
   it('works in 2 levels', function () {
-    Circle = Shape.extend({
+    BBB = AAA.extend({
       getArea: function () { return 9; }
     });
 
-    Ellipse = Circle.extend({
+    CCC = BBB.extend({
       getArea: function () { return 27; }
     });
 
-    expect((new Ellipse()).getArea()).eql(27);
+    expect((new CCC()).getArea()).eql(27);
   });
 
   it('works with a "initialize" method', function () {
     var called = 0;
 
-    Circle = Shape.extend({
+    BBB = AAA.extend({
       initialize: function () {
         called++;
       }
     });
 
-    new Circle();
+    new BBB();
     expect(called).eql(1);
+  });
+
+  it('works with a "initialize" method in 2 levels', function () {
+    var called = { b: 0, c: 0 };
+
+    BBB = AAA.extend({
+      initialize: function () { called.b++; }
+    });
+
+    CCC = BBB.extend({
+      initialize: function () { called.c++; }
+    });
+
+    new CCC();
+    expect(called.b).eql(1);
+    expect(called.c).eql(1);
   });
 });
