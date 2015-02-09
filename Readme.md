@@ -1,8 +1,6 @@
 # simpler-extend
 
-Simple 'extend' helper for inheritance and subclassing. Adapted from Backbone.js and CoffeeScript.
-
-Works like [simple-extend](https://www.npmjs.com/package/simple-extend), except this does not have any dependencies9
+**Simple 'extend' helper for inheritance and subclassing.** Adapted from Backbone.js's [Model.extend] and CoffeeScript. This works like [simple-extend](https://www.npmjs.com/package/simple-extend), except this does not have any dependencies.
 
 <br>
 
@@ -23,7 +21,7 @@ var Circle = Shape.extend({
 });
 ```
 
-See Backbone.js's [Model.extend](http://backbonejs.org/#Model-extend) documentation for more details.
+See Backbone.js's [Model.extend] documentation for more details.
 
 <br>
 
@@ -38,3 +36,4 @@ Authored and maintained by Rico Sta. Cruz with help from contributors ([list][co
 
 [MIT]: http://mit-license.org/
 [contributors]: http://github.com/rstacruz/simpler-extend/contributors
+[Model.extend]: http://backbonejs.org/#Model-extend
