@@ -23,6 +23,26 @@ var Circle = Shape.extend({
 });
 ```
 
+You can also add a constructor as `initialize`:
+
+```js
+var Circle = Shape.extend({
+  initialize: function () { ... }
+});
+```
+
+Calling methods from the base class:
+
+```js
+var Circle = Shape.extend({
+  getArea: function () {
+    var super = Shape.prototype.getArea.apply(this, arguments);
+    return super * Math.PI;
+  }
+});
+```
+
+
 See Backbone.js's [Model.extend] documentation for more details.
 
 <br>
