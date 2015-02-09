@@ -2,6 +2,8 @@
 
 **Simple 'extend' helper for inheritance and subclassing.** Adapted from Backbone.js's [Model.extend] and CoffeeScript. This works like [simple-extend](https://www.npmjs.com/package/simple-extend), except this does not have any dependencies.
 
+[![Status](http://img.shields.io/travis/rstacruz/simpler-extend/master.svg?style=flat)](https://travis-ci.org/rstacruz/simpler-extend "See test builds")
+
 <br>
 
 ## Usage
