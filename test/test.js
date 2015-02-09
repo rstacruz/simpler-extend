@@ -40,4 +40,17 @@ describe('basic case', function () {
 
     expect((new Ellipse()).getArea()).eql(27);
   });
+
+  it('works with a "initialize" method', function () {
+    var called = 0;
+
+    Circle = Shape.extend({
+      initialize: function () {
+        called++;
+      }
+    });
+
+    new Circle();
+    expect(called).eql(1);
+  });
 });
