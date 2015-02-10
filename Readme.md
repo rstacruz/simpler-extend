@@ -19,15 +19,17 @@ Then use it to subclass:
 
 ```js
 var Circle = Shape.extend({
-  ...
+  getArea: function () {
+    return this.width * this.height;
+  }
 });
 ```
 
-You can also add a constructor as `initialize`:
+You can also add a constructor as `constructor`:
 
 ```js
 var Circle = Shape.extend({
-  initialize: function () { ... }
+  constructor: function () { ... }
 });
 ```
 
