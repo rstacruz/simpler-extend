@@ -12,25 +12,23 @@
  * Or to simplify things:
  *
  *     var Circle = Base.extend({
- *       initialize: function () { ... },
+ *       constructor: function () { ... },
  *       ...
  *     });
  */
 
 function extend (protoProps, staticProps) {
   var Parent = this, key;
-  _extend(Sub, Parent);
-  subclass(Sub, Parent);
-  if (protoProps)  _extend(Sub.prototype, protoProps);
-  if (staticProps) _extend(Sub, staticProps);
+  var Child = (protoProps && protoProps.hasOwnProperty('constructor')) ?
+    protoProps.constructor :
+    function () { Parent.apply(this, arguments); };
 
-  function Sub() {
-    Parent.apply(this, arguments);
-    if (Sub.prototype.initialize)
-      Sub.prototype.initialize.apply(this, arguments);
-  }
+  _extend(Child, Parent);
+  subclass(Child, Parent);
+  if (protoProps)  _extend(Child.prototype, protoProps);
+  if (staticProps) _extend(Child, staticProps);
 
-  return Sub;
+  return Child;
 }
 
 function subclass (child, parent) {

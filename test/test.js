@@ -41,11 +41,11 @@ describe('basic case', function () {
     expect((new CCC()).getArea()).eql(27);
   });
 
-  it('works with a "initialize" method', function () {
+  it('works with a "constructor" method', function () {
     var called = 0;
 
     BBB = AAA.extend({
-      initialize: function () {
+      constructor: function () {
         called++;
       }
     });
@@ -54,15 +54,20 @@ describe('basic case', function () {
     expect(called).eql(1);
   });
 
-  it('works with a "initialize" method in 2 levels', function () {
+  it('works with a "constructor" method in 2 levels', function () {
     var called = { b: 0, c: 0 };
 
     BBB = AAA.extend({
-      initialize: function () { called.b++; }
+      constructor: function () {
+        called.b++;
+      }
     });
 
     CCC = BBB.extend({
-      initialize: function () { called.c++; }
+      constructor: function () {
+        BBB.prototype.constructor.apply(this, arguments);
+        called.c++;
+      }
     });
 
     new CCC();
