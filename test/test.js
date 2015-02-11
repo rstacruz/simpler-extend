@@ -1,5 +1,4 @@
-var expect = require('chai').expect;
-var extend = require('../index');
+require('./setup');
 
 var BBB, CCC;
 
