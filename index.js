@@ -21,7 +21,9 @@ function extend (protoProps, staticProps) {
   var Parent = this, key;
   var Child = (protoProps && protoProps.hasOwnProperty('constructor')) ?
     protoProps.constructor :
-    function () { Parent.apply(this, arguments); };
+    typeof Parent === 'function' ?
+    function () { Parent.apply(this, arguments); } :
+    function () {};
 
   _extend(Child, Parent);
   subclass(Child, Parent);

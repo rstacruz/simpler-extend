@@ -49,6 +49,43 @@ See Backbone.js's [Model.extend] documentation for more details.
 
 <br>
 
+## Creating base classes
+
+To create an extendable class, you can use any kind of JavaScript function with a prototype (a "class"):
+
+```js
+function Shape(width, height) {
+  this.width = width;
+  this.height = height;
+}
+
+Shape.prototype.getArea = function () {
+  return this.width & this.height;
+};
+
+// Allow subclassing `Shape`
+Shape.extend = require('simpler-extend');
+```
+
+Alternatively, you can also use `extend()` on its own:
+
+```js
+var extend = require('simpler-extend');
+
+var Shape = extend({
+  constructor: function(width, height) {
+    this.width = width;
+    this.height = height;
+  },
+
+  getArea: function() {
+    return this.width * this.height;
+  }
+});
+```
+
+<br>
+
 ## Thanks
 
 **simpler-extend** © 2015+, Rico Sta. Cruz. Released under the [MIT] License.<br>
