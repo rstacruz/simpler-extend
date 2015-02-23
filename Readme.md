@@ -67,23 +67,6 @@ Shape.prototype.getArea = function () {
 Shape.extend = require('simpler-extend');
 ```
 
-Alternatively, you can also use `extend()` on its own:
-
-```js
-var extend = require('simpler-extend');
-
-var Shape = extend({
-  constructor: function(width, height) {
-    this.width = width;
-    this.height = height;
-  },
-
-  getArea: function() {
-    return this.width * this.height;
-  }
-});
-```
-
 <br>
 
 ## Thanks
