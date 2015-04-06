@@ -69,6 +69,36 @@ Shape.extend = require('simpler-extend');
 
 <br>
 
+## ES6 notes
+
+`simpler-extend` can be used with ES6 classes. The only advantage of using this over ES6's native inheritance is that it will support legacy ES5 engines like old IE's (which Babel [doesn't support](http://babeljs.io/docs/usage/caveats/#classes-10-and-below-0)).
+
+```js
+/* es6 */
+class Shape {
+  ...
+}
+
+Shape.extend = require('simpler-extend');
+```
+
+Subclassing can use the ES6 object syntax:
+
+```js
+let Circle = Shape.extend({
+  getArea() {
+    var super = Shape.prototype.getArea.apply(this, arguments);
+    return super * Math.PI;
+  },
+
+  getCircumference() {
+    ...
+  }
+})
+```
+
+<br>
+
 ## Thanks
 
 **simpler-extend** © 2015+, Rico Sta. Cruz. Released under the [MIT] License.<br>
