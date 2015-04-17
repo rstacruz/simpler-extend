@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "prepublish": "npm run build-man",
-    "build-man": "ronn man/*.md --html --roff --style=toc,80c --organization=\"@rstacruz\""
+    "build-man": "which ronn && ronn man/*.md --html --roff --style=toc,80c --organization=\"@rstacruz\""
   },
   "author": "Rico Sta. Cruz <hi@ricostacruz.com>",
   "license": "MIT",
