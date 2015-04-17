@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' value='text/html;charset=utf8'>
+  <meta name='generator' value='Ronn/v0.7.3 (http://github.com/rtomayko/ronn/tree/0.7.3)'>
+  <title>simpler-extend(1) - Simple extend helper for inheritance and subclassing</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
+  <style type='text/css' media='all'>
+  /* style: toc */
+  .man-navigation {display:block !important;position:fixed;top:0;left:113ex;height:100%;width:100%;padding:48px 0 0 0;border-left:1px solid #dbdbdb;background:#eee}
+  .man-navigation a,.man-navigation a:hover,.man-navigation a:link,.man-navigation a:visited {display:block;margin:0;padding:5px 2px 5px 30px;color:#999;text-decoration:none}
+  .man-navigation a:hover {color:#111;text-decoration:underline}
+  </style>
+  <style type='text/css' media='all'>
+  /* style: 80c */
+  .mp {max-width:86ex}
+   
+  .man-navigation {left:101ex}
+  </style>
+</head>
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#NAME">NAME</a>
+    <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#USAGE">USAGE</a>
+    <a href="#ES6-NOTES">ES6 NOTES</a>
+    <a href="#ALSO-SEE">ALSO SEE</a>
+    <a href="#COPYRIGHT">COPYRIGHT</a>
+  </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'>simpler-extend(1)</li>
+    <li class='tc'></li>
+    <li class='tr'>simpler-extend(1)</li>
+  </ol>
+
+  <h2 id="NAME">NAME</h2>
+<p class="man-name">
+  <code>simpler-extend</code> - <span class="man-whatis">Simple extend helper for inheritance and subclassing</span>
+</p>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>Simple 'extend' helper for inheritance and subclassing. Adapted from Backbone.js's Model.extend and CoffeeScript. This works like npm:simple-extend, except this does not have any dependencies.</p>
+
+<h2 id="USAGE">USAGE</h2>
+
+<h3 id="Assign-extend">Assign .extend</h3>
+
+<p>Assign it to your base class's <code>.extend</code>:</p>
+
+<pre><code class="js">function Shape() { ... }
+Shape.extend = require('simpler-extend');
+</code></pre>
+
+<h3 id="Subclassing">Subclassing</h3>
+
+<p>Then use it to subclass:</p>
+
+<pre><code class="js">var Circle = Shape.extend({
+  getArea: function () {
+    return this.width * this.height;
+  }
+});
+</code></pre>
+
+<h3 id="Constructors">Constructors</h3>
+
+<p>You can also add a constructor as <code>constructor</code>:</p>
+
+<pre><code class="js">var Circle = Shape.extend({
+  constructor: function () { ... }
+});
+</code></pre>
+
+<h3 id="Methods">Methods</h3>
+
+<p>Calling methods from the base class:</p>
+
+<pre><code class="js">var Circle = Shape.extend({
+  getArea: function () {
+    var super = Shape.prototype.getArea.apply(this, arguments);
+    return super * Math.PI;
+  }
+});
+</code></pre>
+
+<p>See Backbone.js's Model.extend documentation for more details: <a href="http://backbonejs.org/#Model-extend">backbonejs.org</a></p>
+
+<h3 id="Base-classes">Base classes</h3>
+
+<p>To create an extendable class, you can use any kind of JavaScript function with a prototype (a "class"):</p>
+
+<pre><code class="js">function Shape(width, height) {
+  this.width = width;
+  this.height = height;
+}
+
+Shape.prototype.getArea = function () {
+  return this.width &amp; this.height;
+};
+
+// Allow subclassing `Shape`
+Shape.extend = require('simpler-extend');
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="ES6-NOTES">ES6 NOTES</h2>
+
+<p><code>simpler-extend</code> can be used with ES6 classes. The only advantage of using this over ES6's native inheritance is that it will support legacy ES5 engines like old IE's which Babel doesn't support.</p>
+
+<pre><code class="js">/* es6 */
+class Shape {
+  ...
+}
+
+Shape.extend = require('simpler-extend');
+</code></pre>
+
+<p>Subclassing can use the ES6 object syntax:</p>
+
+<pre><code class="js">let Circle = Shape.extend({
+  getArea() {
+    var super = Shape.prototype.getArea.apply(this, arguments);
+    return super * Math.PI;
+  },
+
+  getCircumference() {
+    ...
+  }
+})
+</code></pre>
+
+<h2 id="ALSO-SEE">ALSO SEE</h2>
+
+<ul>
+<li><a href="http://backbonejs.org/#Model-extend">Model.extend</a></li>
+<li><a href="https://www.npmjs.com/package/simple-extend">simple-extend</a></li>
+</ul>
+
+
+<h2 id="COPYRIGHT">COPYRIGHT</h2>
+
+<p><strong>simpler-extend</strong> (c) 2015+, Rico Sta. Cruz. Released under the <a href="http://mit-license.org/">MIT License</a>.
+Authored and maintained by Rico Sta. Cruz with help from contributors.</p>
+
+<ul>
+<li><a href="http://ricostacruz.com">ricostacruz.com</a></li>
+<li>GitHub <a href="https://github.com/rstacruz">@rstacruz</a></li>
+<li>Twitter <a href="https://twitter.com/rstacruz">@rstacruz</a></li>
+</ul>
+
+
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'>@rstacruz</li>
+    <li class='tc'>April 2015</li>
+    <li class='tr'>simpler-extend(1)</li>
+  </ol>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,171 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "SIMPLER\-EXTEND" "1" "April 2015" "@rstacruz" ""
+.
+.SH "NAME"
+\fBsimpler\-extend\fR \- Simple extend helper for inheritance and subclassing
+.
+.SH "DESCRIPTION"
+Simple \'extend\' helper for inheritance and subclassing\. Adapted from Backbone\.js\'s Model\.extend and CoffeeScript\. This works like npm:simple\-extend, except this does not have any dependencies\.
+.
+.SH "USAGE"
+.
+.SS "Assign \.extend"
+Assign it to your base class\'s \fB\.extend\fR:
+.
+.IP "" 4
+.
+.nf
+
+function Shape() { \.\.\. }
+Shape\.extend = require(\'simpler\-extend\');
+.
+.fi
+.
+.IP "" 0
+.
+.SS "Subclassing"
+Then use it to subclass:
+.
+.IP "" 4
+.
+.nf
+
+var Circle = Shape\.extend({
+  getArea: function () {
+    return this\.width * this\.height;
+  }
+});
+.
+.fi
+.
+.IP "" 0
+.
+.SS "Constructors"
+You can also add a constructor as \fBconstructor\fR:
+.
+.IP "" 4
+.
+.nf
+
+var Circle = Shape\.extend({
+  constructor: function () { \.\.\. }
+});
+.
+.fi
+.
+.IP "" 0
+.
+.SS "Methods"
+Calling methods from the base class:
+.
+.IP "" 4
+.
+.nf
+
+var Circle = Shape\.extend({
+  getArea: function () {
+    var super = Shape\.prototype\.getArea\.apply(this, arguments);
+    return super * Math\.PI;
+  }
+});
+.
+.fi
+.
+.IP "" 0
+.
+.P
+See Backbone\.js\'s Model\.extend documentation for more details: backbonejs\.org \fIhttp://backbonejs\.org/#Model\-extend\fR
+.
+.SS "Base classes"
+To create an extendable class, you can use any kind of JavaScript function with a prototype (a "class"):
+.
+.IP "" 4
+.
+.nf
+
+function Shape(width, height) {
+  this\.width = width;
+  this\.height = height;
+}
+
+Shape\.prototype\.getArea = function () {
+  return this\.width & this\.height;
+};
+
+// Allow subclassing `Shape`
+Shape\.extend = require(\'simpler\-extend\');
+.
+.fi
+.
+.IP "" 0
+.
+.P
+.
+.br
+.
+.SH "ES6 NOTES"
+\fBsimpler\-extend\fR can be used with ES6 classes\. The only advantage of using this over ES6\'s native inheritance is that it will support legacy ES5 engines like old IE\'s which Babel doesn\'t support\.
+.
+.IP "" 4
+.
+.nf
+
+/* es6 */
+class Shape {
+  \.\.\.
+}
+
+Shape\.extend = require(\'simpler\-extend\');
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Subclassing can use the ES6 object syntax:
+.
+.IP "" 4
+.
+.nf
+
+let Circle = Shape\.extend({
+  getArea() {
+    var super = Shape\.prototype\.getArea\.apply(this, arguments);
+    return super * Math\.PI;
+  },
+
+  getCircumference() {
+    \.\.\.
+  }
+})
+.
+.fi
+.
+.IP "" 0
+.
+.SH "ALSO SEE"
+.
+.IP "\(bu" 4
+Model\.extend \fIhttp://backbonejs\.org/#Model\-extend\fR
+.
+.IP "\(bu" 4
+simple\-extend \fIhttps://www\.npmjs\.com/package/simple\-extend\fR
+.
+.IP "" 0
+.
+.SH "COPYRIGHT"
+\fBsimpler\-extend\fR (c) 2015+, Rico Sta\. Cruz\. Released under the MIT License \fIhttp://mit\-license\.org/\fR\. Authored and maintained by Rico Sta\. Cruz with help from contributors\.
+.
+.IP "\(bu" 4
+ricostacruz\.com \fIhttp://ricostacruz\.com\fR
+.
+.IP "\(bu" 4
+GitHub @rstacruz \fIhttps://github\.com/rstacruz\fR
+.
+.IP "\(bu" 4
+Twitter @rstacruz \fIhttps://twitter\.com/rstacruz\fR
+.
+.IP "" 0
+

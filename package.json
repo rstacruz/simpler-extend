@@ -4,7 +4,9 @@
   "description": "Simple 'extend' helper for inheritance and subclassing",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "prepublish": "npm run build-man",
+    "build-man": "ronn man/*.md --html --roff --style=toc,80c --organization=\"@rstacruz\""
   },
   "author": "Rico Sta. Cruz <hi@ricostacruz.com>",
   "license": "MIT",
@@ -14,6 +16,7 @@
     "mocha-clean": "^0.4.0"
   },
   "directories": {
+    "man": "man",
     "test": "test"
   },
   "repository": {
